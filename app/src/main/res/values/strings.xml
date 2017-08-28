@@ -10,7 +10,7 @@
     <string name="Picture">Picture</string>
     <string name="termsdescription1">This app will display your name, place of study and the validity of your digital student card. The app will display a photo of you if you choose to select one. The app will function as a student card and can be used as identification for services your place of study has an agreement with. First time usage requires you to be connected to WiFi or a cellular connection to download the information required to display the student card. This information will be stored locally on the app. KortFri does not take any responsibility for tickets, abuse or any usage that violates Norwegian or international laws. The photos uploaded on this app will be deleted from our database once you as a user are deleted from our systems. Users with admin-rights to the KortFri system have the possibility to delete users. Usually this will be the IT-responsible at? your place of study.</string>
     <string name="termsdescription2">Are you 15 or older, and do you accept our terms of use?</string>
-    <string name="termsdescription3">The card will be valid for one semester at a time before it has to get updated, the spring semester reaches from 01.01-31.08 and the fall semester from 01.09-31.12.</string>
+    <string name="termsdescription3">The card will be valid for one semester at a time before it has to get updated, the spring semester reaches from 01.01 to 31.07 and the fall semester from 01.08 to 31.12.</string>
     <string name="title_activity_main4">Main4Activity</string>
     <string name="title_activity_test">test</string>
     <string name="barcode">Barcode</string>
@@ -34,7 +34,7 @@
     <string name="contactIT">Contact IT support</string>
     <string name="signInDigiFail">Login failed</string>
     <string name="studentbevis">STUDENT CARD</string>
-    <string name="companynameLong">Kristen Videregående skole Trøndelag</string>
+    <string name="companynamelong">Kristen Videregående skole Trøndelag</string>
     <string name="companyname">KVT</string>
     <string name="GyldigTil">Valid for </string>
     <string name="expired">EXPIRED</string>

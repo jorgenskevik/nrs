@@ -138,7 +138,7 @@
         android:layout_below="@+id/studentid"
         android:layout_centerHorizontal="true"
         android:fontFamily="sans-serif"
-        android:text="@string/companynameLong"
+        android:text="@string/companynamelong"
         android:textColor="@android:color/black"
         android:textSize="14sp" />
 

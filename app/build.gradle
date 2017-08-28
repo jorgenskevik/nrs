@@ -24,10 +24,10 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.example.jorgenskevik.e_cardholders"
+        applicationId "com.KortFri.jorgenskevik.e_cardholders"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 1
+        versionCode 4
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -86,7 +86,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.android.support:appcompat-v7:25.3.0'
     compile 'com.android.support:design:25.3.0'
-    compile 'org.apache.directory.studio:org.apache.commons.io:2.4'
+    //compile 'org.apache.directory.studio:org.apache.commons.io:2.4'
     compile 'com.google.zxing:core:3.2.1'
     compile 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
     compile 'net.danlew:android.joda:2.9.9'

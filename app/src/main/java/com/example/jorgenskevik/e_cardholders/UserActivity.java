@@ -363,7 +363,7 @@ public class UserActivity extends AppCompatActivity implements ActionSheet.Actio
 
             targetFormat = new SimpleDateFormat("dd-MMM-yyyy", Locale.GERMANY);
             try {
-                if(Calendar.getInstance().get(Calendar.MONTH) + 1 < 9){
+                if(Calendar.getInstance().get(Calendar.MONTH) + 1 < 8){
                     thisExpDate = userDetails.get(SessionManager.KEY_EXPERATIONDATE);
                     date = simpleDateFormat.parse(thisExpDate);
                     formattedDate = targetFormat.format(date);
@@ -453,6 +453,7 @@ public class UserActivity extends AppCompatActivity implements ActionSheet.Actio
 
             } else {
                 selectedColor = Color.rgb(132, 205, 182);
+                selectedWhite = Color.rgb(255,255,255);
                 int selectedBlack = Color.rgb(50, 43, 43);
                 int black = Color.rgb(0, 0, 0);
 
@@ -471,11 +472,12 @@ public class UserActivity extends AppCompatActivity implements ActionSheet.Actio
                 imageView.setLayoutParams(layoutParams);
                 layoutParams.gravity = Gravity.CENTER;
                 Button myButtonOk = new Button(this);
+                myButtonOk.setBackgroundColor(selectedColor);
+
                 Button myButtonCansel = new Button(this);
                 myButtonOk.setText("OK");
                 myButtonOk.setTextColor(selectedWhite);
                 myButtonCansel.setTextColor(selectedWhite);
-                myButtonOk.setBackgroundColor(selectedColor);
                 myButtonCansel.setText(R.string.back);
                 myButtonCansel.setBackgroundColor(selectedBlack);
                 TextView myTextView = new TextView(this);
@@ -573,7 +575,7 @@ public class UserActivity extends AppCompatActivity implements ActionSheet.Actio
                             selectedWhite = Color.rgb(255, 255, 255);
                             targetFormat = new SimpleDateFormat("dd-MMM-yyyy");
                             try {
-                                if(Calendar.getInstance().get(Calendar.MONTH) + 1 < 9){
+                                if(Calendar.getInstance().get(Calendar.MONTH) + 1 < 8){
                                     date = simpleDateFormat.parse(dateTimeExpiration);
                                     formattedDate = targetFormat.format(date);
                                     expirationDate =getResources().getString(R.string.spring) + " " + Calendar.getInstance().get(Calendar.YEAR);

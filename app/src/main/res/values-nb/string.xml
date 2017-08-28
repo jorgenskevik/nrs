@@ -11,8 +11,10 @@
     <string name="Picture">Bilde</string>
     <string name="termsdescription1">Appen vil vise informasjon om navn, studiested og gyldigheten til det digitale studentbeviset. Appen vil også vise bilde av deg - som du selv velger. Appen fungerer som studentbevis, og kan benyttes som legitimasjon hos selskaper som har avtale med ditt studiested om honnør-billetter. Ved førstegangs bruk må appen være tilkoblet internett for å kunne last ned informasjonen som finnes om deg. Denne blir lagret lokalt og du trenger derfor ikke være på nett for å bruke appen senere. KortFri tar ikke ansvar for bøter, misbruk og lignende.</string>
     <string name="termsdescription2">Er du over 15 år og godtar våre vilkår?</string>
-    <string name="termsdescription3">Kortet vil være gyldig et semester av gangen før det må oppdateres, vårsemestret strekker seg fra 01.01-31.08 og høstsemestret fra 01.09-31.12.</string>
+    <string name="termsdescription3">Kortet vil være gyldig et semester av gangen før det må oppdateres, vårsemestret strekker seg fra 01.01 til 31.07 og høstsemestret fra 01.08 til 31.12.</string>
     <string name="barcode">Barkode</string>
+    <string name="title_activity_test">test</string>
+    <string name="title_activity_main4">Main4Activity</string>
     <string name="studentcard">Studentbevis</string>
     <string name="digitsfail">Digits innlogging feilet</string>
     <string name="closeSettings">Avbryt</string>
