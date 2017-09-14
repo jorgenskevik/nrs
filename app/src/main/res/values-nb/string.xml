@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">KVT - KortFri</string>
+    <string name="app_name">Nordland kunst- og filmfagskole - KortFri</string>
     <string name="headerTwo">Vi digitaliserer ditt skolebevis</string>
     <string name="Madewith">Laget med</string>
     <string name="forKVT">for</string>
     <string name="Contactus">Kontakt oss</string>
     <string name="Sendanemail">Send en mail:</string>
-    <string name="Callus">Ring KVT:</string>
+    <string name="Callus">Ring oss:</string>
     <string name="Terms">Vilkår</string>
     <string name="Picture">Bilde</string>
     <string name="termsdescription1">Appen vil vise informasjon om navn, studiested og gyldigheten til det digitale studentbeviset. Appen vil også vise bilde av deg - som du selv velger. Appen fungerer som studentbevis, og kan benyttes som legitimasjon hos selskaper som har avtale med ditt studiested om honnør-billetter. Ved førstegangs bruk må appen være tilkoblet internett for å kunne last ned informasjonen som finnes om deg. Denne blir lagret lokalt og du trenger derfor ikke være på nett for å bruke appen senere. KortFri tar ikke ansvar for bøter, misbruk og lignende.</string>
     <string name="termsdescription2">Er du over 15 år og godtar våre vilkår?</string>
-    <string name="termsdescription3">Kortet vil være gyldig et semester av gangen før det må oppdateres, vårsemestret strekker seg fra 01.01 til 31.07 og høstsemestret fra 01.08 til 31.12.</string>
+    <string name="termsdescription3">Kortet vil være gyldig et semester av gangen før det må oppdateres, vårsemestret strekker seg fra 01.01 til 31.08 og høstsemestret fra 01.09 til 31.12.</string>
     <string name="barcode">Barkode</string>
     <string name="title_activity_test">test</string>
     <string name="title_activity_main4">Main4Activity</string>
@@ -33,8 +33,10 @@
     <string name="youareadmin">Du er admin, bruk web-applikasjonen</string>
     <string name="contactIT">Ta kontakt med IT-avdelingen</string>
     <string name="studentbevis">STUDENTBEVIS</string>
-    <string name="companynamelong">Kristen Videregående skole Trøndelag</string>
-    <string name="companyname">KVT</string>
+    <string name="companynamelong">Nordland kunst- og filmfagskole</string>
+    <string name="companyname">NKFS</string>
+    <string name="obs">Dette er flaut</string>
+    <string name="missingPhoto">Det ser ut som noe gikk galt. Prøv på nytt med et annet bilde eller ta kontakt med IKT</string>
     <string name="GyldigTil">Gyldig for </string>
     <string name="expired">UTGÅTT</string>
     <string name="studentnumber">Studentnr:</string>

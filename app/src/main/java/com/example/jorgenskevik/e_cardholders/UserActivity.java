@@ -363,7 +363,7 @@ public class UserActivity extends AppCompatActivity implements ActionSheet.Actio
 
             targetFormat = new SimpleDateFormat("dd-MMM-yyyy", Locale.GERMANY);
             try {
-                if(Calendar.getInstance().get(Calendar.MONTH) + 1 < 8){
+                if(Calendar.getInstance().get(Calendar.MONTH) + 1 < 9){
                     thisExpDate = userDetails.get(SessionManager.KEY_EXPERATIONDATE);
                     date = simpleDateFormat.parse(thisExpDate);
                     formattedDate = targetFormat.format(date);
@@ -575,7 +575,7 @@ public class UserActivity extends AppCompatActivity implements ActionSheet.Actio
                             selectedWhite = Color.rgb(255, 255, 255);
                             targetFormat = new SimpleDateFormat("dd-MMM-yyyy");
                             try {
-                                if(Calendar.getInstance().get(Calendar.MONTH) + 1 < 8){
+                                if(Calendar.getInstance().get(Calendar.MONTH) + 1 < 9){
                                     date = simpleDateFormat.parse(dateTimeExpiration);
                                     formattedDate = targetFormat.format(date);
                                     expirationDate =getResources().getString(R.string.spring) + " " + Calendar.getInstance().get(Calendar.YEAR);

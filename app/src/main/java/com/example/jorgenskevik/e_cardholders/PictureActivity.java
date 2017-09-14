@@ -157,7 +157,6 @@ public class PictureActivity extends Activity {
         mediaPath = intent.getExtras().getString("picture");
         File f = new File(mediaPath);
         Picasso.with(getApplicationContext()).load(f).resize(300,300).centerCrop().into(imageView);
-
     }
 
     /**
@@ -210,50 +209,54 @@ public class PictureActivity extends Activity {
 
             String mimeType = getMimeType(file);
 
-            RequestBody reqFile = RequestBody.create(MediaType.parse(mimeType), file);
-            MultipartBody.Part body = MultipartBody.Part.createFormData("photo", file.getName(), reqFile);
-            RequestBody name = RequestBody.create(MediaType.parse("multipart/form-data"), fourDigits);
+            try {
+                RequestBody reqFile = RequestBody.create(MediaType.parse(mimeType), file);
+                MultipartBody.Part body = MultipartBody.Part.createFormData("photo", file.getName(), reqFile);
+                RequestBody name = RequestBody.create(MediaType.parse("multipart/form-data"), fourDigits);
 
 
-            userapi.postPicture(id, bearerToken, KVTVariables.getAcceptVersion(), KVTVariables.getAppkey(), body, name).enqueue(new Callback<User>() {
-                @Override
-                public void onResponse(Call<User> call, Response<User> response) {
-                    if (response.isSuccessful()){
-                        user = response.body();
-                        sessionManager.updatePicture(user.getPicture());
-                        sessionManager.updatePath(mediaPath);
-                        sessionManager.updatePictureToken("BRUKT");
+                userapi.postPicture(id, bearerToken, KVTVariables.getAcceptVersion(), KVTVariables.getAppkey(), body, name).enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        if (response.isSuccessful()) {
+                            user = response.body();
+                            sessionManager.updatePicture(user.getPicture());
+                            sessionManager.updatePath(mediaPath);
+                            sessionManager.updatePictureToken("BRUKT");
 
 
-                        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-                        File directory = cw.getDir(studentNumber, Context.MODE_PRIVATE);
-                        File myImageFile = new File(directory, "my_image.jpeg");
-                        if (myImageFile.getAbsoluteFile().delete()){
+                            ContextWrapper cw = new ContextWrapper(getApplicationContext());
+                            File directory = cw.getDir(studentNumber, Context.MODE_PRIVATE);
+                            File myImageFile = new File(directory, "my_image.jpeg");
+                            if (myImageFile.getAbsoluteFile().delete()) {
 
+                            }
+                            Picasso.with(getApplicationContext()).invalidate(myImageFile);
+
+                            //lagre bildet lokalt
+                            Picasso.with(getApplicationContext()).load(user.getPicture()).into(picassoImageTarget(getApplicationContext(), user.getStudentNumber(), "my_image.jpeg"));
+
+                            Intent i = new Intent(PictureActivity.this, UserActivity.class);
+                            startActivity(i);
+                        } else {
+                            context = getApplicationContext();
+                            duration = Toast.LENGTH_SHORT;
+                            toast = Toast.makeText(context, R.string.updatePicture, duration);
+                            toast.show();
                         }
-                        Picasso.with(getApplicationContext()).invalidate(myImageFile);
+                    }
 
-                        //lagre bildet lokalt
-                        Picasso.with(getApplicationContext()).load(user.getPicture()).into(picassoImageTarget(getApplicationContext(), user.getStudentNumber(), "my_image.jpeg"));
-
-                        Intent i = new Intent(PictureActivity.this, UserActivity.class);
-                        startActivity(i);
-                    }else{
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
                         context = getApplicationContext();
                         duration = Toast.LENGTH_SHORT;
-                        toast = Toast.makeText(context, R.string.updatePicture, duration);
+                        toast = Toast.makeText(context, R.string.PictureNotUpdated, duration);
                         toast.show();
                     }
-                }
-
-                @Override
-                public void onFailure(Call<User> call, Throwable t) {
-                    context = getApplicationContext();
-                    duration = Toast.LENGTH_SHORT;
-                    toast = Toast.makeText(context, R.string.PictureNotUpdated, duration);
-                    toast.show();
-                }
-            });
+                });
+            }catch (NullPointerException error){
+                startActivity(new Intent(PictureActivity.this, MissingPicturePopUp.class));
+            }
 
         } else if (!fourDigits.trim().equals(codeString)) {
             context = getApplicationContext();

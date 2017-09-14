@@ -17,7 +17,7 @@ public class ContactUsActivity extends Activity {
      * The constant phoneNumber.
      */
 //public static final String phoneNumber = "tel:72894940";
-    public static final String phoneNumber = "tel:93451944";
+    public static final String phoneNumber = "tel:76066360";
 
     /**
      * The constant web.
@@ -53,7 +53,7 @@ public class ContactUsActivity extends Activity {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("message/rfc822");
         intent.putExtra(Intent.EXTRA_TEXT, message);
-        intent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"kvt@kvt.vgs.no"});
+        intent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"kfilm-post@vgs.nfk.no"});
         Intent mailer = Intent.createChooser(intent, null);
         startActivity(mailer);
     }

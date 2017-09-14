@@ -39,7 +39,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:adjustViewBounds="true"
-        android:src="@drawable/kvt123"
+        android:src="@drawable/complogohvit"
         android:layout_alignBottom="@+id/button11"
         android:layout_alignLeft="@+id/companynamePhoto"
         android:layout_alignStart="@+id/companynamePhoto"
@@ -187,6 +187,5 @@
         android:layout_marginLeft="15dp"
         android:layout_marginStart="15dp"
         />
-
 
 </RelativeLayout>
