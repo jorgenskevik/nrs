@@ -8,11 +8,11 @@ import android.content.SharedPreferences;
 public class KVTVariables {
 
     private static String Local_URL = "http://10.0.2.2:9000/";
-    private static String AcceptVersion = "V1";
+    private static String AcceptVersion = "V2";
     private static String TWITTER_KEY = "OwT8vAGt92TMSDRK3O9naZznW";
     private static String TWITTER_SECRET = "PfC1rhbLQ8WSnmJCgqKwyfPZJyjyAoLHzx61sClci42tiiA38R";
-    private static String Appkey = "8ba1b10b0c28f4e1c1e5d19325c153a2";
-    private static String BASE_URL = "https://apinkfs.kortfri.no/";
+    private static String Appkey = "04a6b84fecb10cb43ae70a0404850c50";
+    private static String BASE_URL = "https://apinrs.kortfri.no/";
 
     private static String tokenlogin = "";
     private static String userID = "";
@@ -24,7 +24,6 @@ public class KVTVariables {
     private static String role = "";
     private static String birthday = "";
     private static SharedPreferences userIdPrefs;
-
 
     /**
      * Gets local url.

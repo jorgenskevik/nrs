@@ -1,12 +1,16 @@
 package com.example.jorgenskevik.e_cardholders;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -27,10 +31,14 @@ import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 
 import okhttp3.MediaType;
@@ -171,7 +179,6 @@ public class PictureActivity extends Activity {
         toast.show();
     }
 
-
     /**
      * Add picture button.
      *
@@ -205,58 +212,55 @@ public class PictureActivity extends Activity {
             id = userDetails.get(SessionManager.KEY_ID);
             UserAPI userapi = retrofit.create(UserAPI.class);
             bearerToken = "Bearer " + authToken.toString();
-            File file = new File(mediaPath);
+            final File file = new File(mediaPath);
+
 
             String mimeType = getMimeType(file);
 
-            try {
-                RequestBody reqFile = RequestBody.create(MediaType.parse(mimeType), file);
-                MultipartBody.Part body = MultipartBody.Part.createFormData("photo", file.getName(), reqFile);
-                RequestBody name = RequestBody.create(MediaType.parse("multipart/form-data"), fourDigits);
+            RequestBody reqFile = RequestBody.create(MediaType.parse(mimeType), file);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("photo", file.getName(), reqFile);
+            RequestBody name = RequestBody.create(MediaType.parse("multipart/form-data"), fourDigits);
+
+            userapi.postPicture(id, bearerToken, KVTVariables.getAcceptVersion(), KVTVariables.getAppkey(), body, name).enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    if (response.isSuccessful()){
+                        user = response.body();
+                        sessionManager.updatePicture(user.getPicture());
+                        sessionManager.updatePath(mediaPath);
+                        sessionManager.updatePictureToken("BRUKT");
+                        sessionManager.updateTurn(getCameraPhotoOrientation(mediaPath));
 
 
-                userapi.postPicture(id, bearerToken, KVTVariables.getAcceptVersion(), KVTVariables.getAppkey(), body, name).enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        if (response.isSuccessful()) {
-                            user = response.body();
-                            sessionManager.updatePicture(user.getPicture());
-                            sessionManager.updatePath(mediaPath);
-                            sessionManager.updatePictureToken("BRUKT");
+                        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+                        File directory = cw.getDir(studentNumber, Context.MODE_PRIVATE);
+                        File myImageFile = new File(directory, "my_image." + getMimeType(file));
 
+                        if (myImageFile.getAbsoluteFile().delete()){
 
-                            ContextWrapper cw = new ContextWrapper(getApplicationContext());
-                            File directory = cw.getDir(studentNumber, Context.MODE_PRIVATE);
-                            File myImageFile = new File(directory, "my_image.jpeg");
-                            if (myImageFile.getAbsoluteFile().delete()) {
-
-                            }
-                            Picasso.with(getApplicationContext()).invalidate(myImageFile);
-
-                            //lagre bildet lokalt
-                            Picasso.with(getApplicationContext()).load(user.getPicture()).into(picassoImageTarget(getApplicationContext(), user.getStudentNumber(), "my_image.jpeg"));
-
-                            Intent i = new Intent(PictureActivity.this, UserActivity.class);
-                            startActivity(i);
-                        } else {
-                            context = getApplicationContext();
-                            duration = Toast.LENGTH_SHORT;
-                            toast = Toast.makeText(context, R.string.updatePicture, duration);
-                            toast.show();
                         }
-                    }
+                        Picasso.with(getApplicationContext()).invalidate(myImageFile);
 
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
+                        //lagre bildet lokalt
+                        Picasso.with(getApplicationContext()).load(user.getPicture()).into(picassoImageTarget(getApplicationContext(), user.getStudentNumber(), "my_image.jpeg"));
+                        Intent i = new Intent(PictureActivity.this, UserActivity.class);
+                        startActivity(i);
+                    }else{
                         context = getApplicationContext();
                         duration = Toast.LENGTH_SHORT;
-                        toast = Toast.makeText(context, R.string.PictureNotUpdated, duration);
+                        toast = Toast.makeText(context, R.string.updatePicture, duration);
                         toast.show();
                     }
-                });
-            }catch (NullPointerException error){
-                startActivity(new Intent(PictureActivity.this, MissingPicturePopUp.class));
-            }
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    context = getApplicationContext();
+                    duration = Toast.LENGTH_SHORT;
+                    toast = Toast.makeText(context, R.string.PictureNotUpdated, duration);
+                    toast.show();
+                }
+            });
 
         } else if (!fourDigits.trim().equals(codeString)) {
             context = getApplicationContext();
@@ -266,23 +270,48 @@ public class PictureActivity extends Activity {
         }
     }
 
-    /**
-     * Gets mime type.
-     *
-     * @param url the url
-     * @return the mime type
-     */
-    public static String getMimeType(File url) {
+    public String getMimeType(File url) {
         String type = null;
-        String extension = MimeTypeMap.getFileExtensionFromUrl(String.valueOf(url));
+        String test = String.valueOf(url);
+        test = test.toLowerCase();
+        String extension = MimeTypeMap.getFileExtensionFromUrl(test);
         if (extension != null) {
-            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension.toLowerCase());
+        }if(type == null){
+            type = "image/*";
         }
         return type;
     }
 
+
+    public String getCameraPhotoOrientation(String imagePath) {
+        String rotate = "kortfri";
+        try {
+            File imageFile = new File(imagePath);
+            ExifInterface exif = new ExifInterface(imageFile.getAbsolutePath());
+            int orientation = exif.getAttributeInt(
+                    ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL);
+
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    rotate = "270";
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    rotate = "180";
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    rotate = "90";
+                    break;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rotate;
+    }
+
     private Target picassoImageTarget(Context context, final String imageDir, final String imageName) {
-        Log.d("picassoImageTarget", " picassoImageTarget");
         ContextWrapper cw = new ContextWrapper(context);
         final File directory = cw.getDir(imageDir, Context.MODE_PRIVATE); // path to /data/data/yourapp/app_imageDir
         return new Target() {
@@ -305,8 +334,6 @@ public class PictureActivity extends Activity {
                                 e.printStackTrace();
                             }
                         }
-                        Log.i("image", "image saved to >>>" + myImageFile.getAbsolutePath());
-
                     }
                 }).start();
             }

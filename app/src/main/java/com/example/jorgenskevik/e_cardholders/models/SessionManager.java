@@ -121,6 +121,7 @@ public class SessionManager {
 
     public static final String KEY_CHECK = "check";
 
+    public static final String KEY_TURN = "turn";
 
 
     /**
@@ -251,6 +252,7 @@ public class SessionManager {
         editor.commit();
     }
 
+
     /**
      * Update path.
      *
@@ -270,6 +272,7 @@ public class SessionManager {
         editor.apply();
 
     }
+
 
     /**
      * Update picture.
@@ -294,6 +297,18 @@ public class SessionManager {
 
         // Storing role in pref
         editor.putString(KEY_CHECK, check);
+
+        // commit changes
+        editor.apply();
+
+    }
+
+    public void updateTurn(String turn){
+        // Storing login value as TRUE
+        editor.putBoolean(IS_LOGIN, true);
+
+        // Storing role in pref
+        editor.putString(KEY_TURN, turn);
 
         // commit changes
         editor.apply();
@@ -353,6 +368,9 @@ public class SessionManager {
 
         // user check
         user.put(KEY_CHECK, pref.getString(KEY_CHECK, null));
+
+        user.put(KEY_TURN, pref.getString(KEY_TURN, null));
+
 
         // return user
         return user;

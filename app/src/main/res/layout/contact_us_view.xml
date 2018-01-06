@@ -21,23 +21,22 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:alpha="0.7"
+        android:alpha="0.1"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-       />
+        android:layout_alignParentStart="true"/>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/greyblur"
+        android:src="@drawable/darkblue"
         android:scaleType="fitXY"
         android:id="@+id/GREYBLUR"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:alpha="0.95" />
+        android:alpha="0.9" />
 
     <View
         android:layout_width="match_parent"
@@ -50,13 +49,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/love"
-        android:layout_marginBottom="10dp"
         android:id="@+id/imageView3"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/imageView2"
-        android:layout_alignEnd="@+id/imageView2"
-        android:layout_marginRight="8dp"
-        android:layout_marginEnd="8dp" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:text="@string/Madewith"
@@ -64,69 +59,25 @@
         android:layout_height="wrap_content"
         android:id="@+id/MadeWith"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:layout_alignBottom="@+id/imageView3"
         android:layout_toLeftOf="@+id/imageView3"
         android:layout_toStartOf="@+id/imageView3"
         android:layout_marginRight="5dp"
         android:layout_marginEnd="5dp"
-
-
-        />
+        android:layout_marginBottom="5dp" />
 
     <TextView
-        android:text="KortFri"
+        android:text="@string/infomasjon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ECARDHOLDER"
         android:textColor="@android:color/white"
-        android:textSize="42sp"
+        android:textSize="30sp"
+        android:textStyle="bold"
         android:layout_marginTop="42dp"
         android:layout_below="@+id/view2"
         android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:text="@string/Sendanemail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/secondheader"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
-        android:layout_below="@+id/ECARDHOLDER"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp" />
-
-    <TextView
-        android:text="@string/Callus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
-        android:id="@+id/thirdheader"
-        android:textColor="@android:color/white"
-        android:textSize="24sp" />
-
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/email"
-        android:id="@+id/imageView"
-        android:layout_alignTop="@+id/secondheader"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:onClick="OpenMail"/>
-
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/phone"
-        android:id="@+id/imageView2"
-        android:layout_below="@+id/thirdheader"
-        android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView"
-        android:layout_marginTop="20dp"
-        android:onClick="OpenPhone"/>
 
     <TextView
         android:text="@string/forKVT"
@@ -134,7 +85,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/forKVT"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:layout_marginLeft="2dp"
         android:layout_marginStart="2dp"
         android:layout_alignBottom="@+id/imageView3"
@@ -148,7 +99,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/forKVT1"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
         android:layout_alignBottom="@+id/imageView3"
@@ -157,16 +108,52 @@
         android:layout_alignTop="@+id/MadeWith" />
 
     <Button
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:onClick="OpenPhone"
+        android:hint="Phone"
+        android:textSize="16sp"
+        android:background="@drawable/my_button_bg"
+        android:textColorHint="@color/tw__solid_white"
+        android:layout_below="@+id/ECARDHOLDER"
+        android:layout_marginTop="60dp"
+        android:layout_alignLeft="@+id/ECARDHOLDER"
+        android:layout_alignStart="@+id/ECARDHOLDER"
+        android:layout_alignRight="@+id/ECARDHOLDER"
+        android:layout_alignEnd="@+id/ECARDHOLDER" />
+
+    <Button
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Email"
+        android:onClick="OpenMail"
+        android:background="@drawable/my_button_bg"
+        android:textSize="16sp"
+        android:textColorHint="@color/tw__solid_white"
+        android:layout_marginTop="155dp"
+        android:layout_below="@+id/ECARDHOLDER"
+        android:layout_alignLeft="@+id/editText"
+        android:layout_alignStart="@+id/editText"
+        android:layout_alignRight="@+id/editText"
+        android:layout_alignEnd="@+id/editText" />
+
+    <Button
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/imageView3"
+        android:textAllCaps="false"
         android:background="@color/tw__transparent"
-        android:layout_centerHorizontal="true"
         android:onClick="openBrowser"
-        android:layout_marginBottom="6dp"
-        android:textSize="18sp"
+        android:textStyle="italic"
+        android:textSize="22sp"
         android:textColor="@android:color/white"
-        android:text="@string/kortfriNorge" />
+        android:text="@string/kortfriNorge"
+        android:layout_below="@+id/editText2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp" />
 
 </RelativeLayout>

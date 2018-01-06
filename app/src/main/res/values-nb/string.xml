@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Nordland kunst- og filmfagskole - KortFri</string>
-    <string name="headerTwo">Vi digitaliserer ditt skolebevis</string>
+    <string name="app_name">Norsk Restaurantskole - KortFri</string>
+    <string name="headerTwo">En leverandør av digitale kortløsninger</string>
     <string name="Madewith">Laget med</string>
     <string name="forKVT">for</string>
     <string name="Contactus">Kontakt oss</string>
@@ -33,8 +33,9 @@
     <string name="youareadmin">Du er admin, bruk web-applikasjonen</string>
     <string name="contactIT">Ta kontakt med IT-avdelingen</string>
     <string name="studentbevis">STUDENTBEVIS</string>
-    <string name="companynamelong">Nordland kunst- og filmfagskole</string>
-    <string name="companyname">NKFS</string>
+    <string name="companynamelong">Norsk Restaurantskole</string>
+    <string name="companyname">NRS</string>
+    <string name="noegikkgalt">Noe gikk galt, kontakt IT hvis feilen vedvarer</string>
     <string name="obs">Dette er flaut</string>
     <string name="missingPhoto">Det ser ut som noe gikk galt. Prøv på nytt med et annet bilde eller ta kontakt med IKT</string>
     <string name="GyldigTil">Gyldig for </string>
@@ -56,5 +57,29 @@
     <string name="updatePicture">Kunne ikke oppdatere bilde</string>
     <string name="pictureMessage">For å bytte profilbilde må du skrive inn en kode. Denne koden får du utlevert av din lærer eller IT-ansvarlig. OBS: Koden kan bare brukes én gang! Det er bare IT-ansvarlige som kan bytte ditt profilbilde etter at koden er brukt. Dette gjøres fordi kortet skal brukes som identifikasjon. Husk at det kan være straffbart å bruke en annen persons identitet for å oppnå uberettiget vinning. (For. eks: Bruke kompisens eller venninnens app for å få billigere bussbillett.)</string>
     <string name="allertMessage">STOPP! Er du ikke fornøyd med hvordan bildet ser ut må du gå tilbake å endre bilde.</string>
+
+    <string name="verification">Innlogging vellykket</string>
+    <string name="landskode">Landskode:</string>
+
+    <string name="login">Logg inn</string>
+    <string name="infomasjon">Kontaktinformasjon</string>
+
+
+
+    <string name="label_phone_auth">Phone Number Authentication</string>
+    <string name="desc_phone_auth">Use a phone number to authenticate with Firebase.</string>
+    <string name="signed_in">Write phone number</string>
+    <string name="start_phone_auth">Start</string>
+    <string name="verify_phone_auth">Verifiser</string>
+    <string name="resend_phone_auth">Send på ny</string>
+    <string name="hint_phone_number">Mobilnummer</string>
+    <string name="hint_verification_code">Verifiserings Kode</string>
+    <string name="status_code_sent">Code Sent</string>
+    <string name="status_verification_failed">Verification failed</string>
+    <string name="status_verification_succeeded">Verification succeeded</string>
+    <string name="status_sign_in_failed">Sign-in failed</string>
+    <string name="instant_validation">(instant validation)</string>
+    <string name="phone_title_text">Phone Number</string>
+    <string name="sign_out">Sign out</string>
 
 </resources>

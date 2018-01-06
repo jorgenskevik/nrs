@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -319,11 +320,11 @@ public class UserActivity extends AppCompatActivity implements ActionSheet.Actio
         studentNumber = userDetails.get(SessionManager.KEY_STUDENTNUMBER);
         JodaTimeAndroid.init(this);
 
+
         if (path == null) {
             view2.setImageResource(R.drawable.facebookgirl);
 
             if (!picture.equals("")) {
-
                 ContextWrapper cw = new ContextWrapper(this);
                 File directory = cw.getDir(studentNumber, Context.MODE_PRIVATE);
                 File myImageFile = new File(directory, "my_image.jpeg");
@@ -332,7 +333,7 @@ public class UserActivity extends AppCompatActivity implements ActionSheet.Actio
         } else {
             File f = new File(path);
             Picasso.with(getApplicationContext()).load(f).resize(300,300).centerCrop().into(view2);
-    }
+        }
 
         firstAndSirName.setText(firstAndSirNameString);
         extraStudentID = getResources().getString(R.string.studentnumber) + " " + studentIDString;
@@ -357,13 +358,14 @@ public class UserActivity extends AppCompatActivity implements ActionSheet.Actio
 
         } else {
             //gyldig
-            selectedColor = Color.rgb(132, 205, 182);
+            //selectedColor = Color.rgb(132, 205, 182);
+            selectedColor = Color.rgb(239, 146, 72);
             selectedWhite = Color.rgb(255, 255, 255);
             int selectedBlack = Color.rgb(0, 0, 0);
 
             targetFormat = new SimpleDateFormat("dd-MMM-yyyy", Locale.GERMANY);
             try {
-                if(Calendar.getInstance().get(Calendar.MONTH) + 1 < 9){
+                if(Calendar.getInstance().get(Calendar.MONTH) + 1 < 8){
                     thisExpDate = userDetails.get(SessionManager.KEY_EXPERATIONDATE);
                     date = simpleDateFormat.parse(thisExpDate);
                     formattedDate = targetFormat.format(date);
@@ -430,7 +432,7 @@ public class UserActivity extends AppCompatActivity implements ActionSheet.Actio
         //Log out
         if (index == 0) {
             sessionManager.logoutUser();
-            intent = new Intent(UserActivity.this, LoginActivity.class);
+            intent = new Intent(UserActivity.this, LandingPage.class);
             startActivity(intent);
         }
 
@@ -452,8 +454,8 @@ public class UserActivity extends AppCompatActivity implements ActionSheet.Actio
                 toast.show();
 
             } else {
-                selectedColor = Color.rgb(132, 205, 182);
-                selectedWhite = Color.rgb(255,255,255);
+                selectedColor = Color.rgb(239, 146, 72);
+                selectedWhite = Color.rgb(255, 255, 255);
                 int selectedBlack = Color.rgb(50, 43, 43);
                 int black = Color.rgb(0, 0, 0);
 
@@ -472,12 +474,11 @@ public class UserActivity extends AppCompatActivity implements ActionSheet.Actio
                 imageView.setLayoutParams(layoutParams);
                 layoutParams.gravity = Gravity.CENTER;
                 Button myButtonOk = new Button(this);
-                myButtonOk.setBackgroundColor(selectedColor);
-
                 Button myButtonCansel = new Button(this);
                 myButtonOk.setText("OK");
                 myButtonOk.setTextColor(selectedWhite);
                 myButtonCansel.setTextColor(selectedWhite);
+                myButtonOk.setBackgroundColor(selectedColor);
                 myButtonCansel.setText(R.string.back);
                 myButtonCansel.setBackgroundColor(selectedBlack);
                 TextView myTextView = new TextView(this);
@@ -571,11 +572,11 @@ public class UserActivity extends AppCompatActivity implements ActionSheet.Actio
                             expirationButton.setBackgroundColor(selectedColor);
                         } else {
                             //gyldig
-                            selectedColor = Color.rgb(132, 205, 182);
+                            selectedColor = Color.rgb(239, 146, 72);
                             selectedWhite = Color.rgb(255, 255, 255);
                             targetFormat = new SimpleDateFormat("dd-MMM-yyyy");
                             try {
-                                if(Calendar.getInstance().get(Calendar.MONTH) + 1 < 9){
+                                if(Calendar.getInstance().get(Calendar.MONTH) + 1 < 8){
                                     date = simpleDateFormat.parse(dateTimeExpiration);
                                     formattedDate = targetFormat.format(date);
                                     expirationDate =getResources().getString(R.string.spring) + " " + Calendar.getInstance().get(Calendar.YEAR);
@@ -621,9 +622,26 @@ public class UserActivity extends AppCompatActivity implements ActionSheet.Actio
                                 context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(directory, "my_image.jpeg"))));
                             }catch (NullPointerException e){
                             }
-                            Picasso.with(getApplicationContext()).load(user.getPicture()).into(picassoImageTarget(getApplicationContext(), user.getStudentNumber(), "my_image.jpeg"));
-                            Picasso.with(getApplicationContext()).load(picture).resize(300,300).centerCrop().into(view2);
-             }
+
+
+                            try{
+                                userDetails = sessionManager.getUserDetails();
+                                userDetails = sessionManager.getUserDetails();
+                                String kortfri = userDetails.get(SessionManager.KEY_TURN);
+                                if(kortfri.equals("kortfri")){
+                                    Picasso.with(getApplicationContext()).load(user.getPicture()).into(picassoImageTarget(getApplicationContext(), user.getStudentNumber(), "my_image.jpeg"));
+                                    Picasso.with(getApplicationContext()).load(picture).resize(300,300).centerCrop().into(view2);
+                                }else{
+                                    float rotateImage = Float.parseFloat(userDetails.get(SessionManager.KEY_TURN));
+                                    Picasso.with(getApplicationContext()).load(user.getPicture()).rotate(rotateImage).into(picassoImageTarget(getApplicationContext(), user.getStudentNumber(), "my_image.jpeg"));
+                                    Picasso.with(getApplicationContext()).load(picture).rotate(rotateImage).resize(300,300).centerCrop().into(view2);
+                                }
+
+                            }catch (NullPointerException e){
+                                Picasso.with(getApplicationContext()).load(user.getPicture()).into(picassoImageTarget(getApplicationContext(), user.getStudentNumber(), "my_image.jpeg"));
+                                Picasso.with(getApplicationContext()).load(picture).resize(300,300).centerCrop().into(view2);
+                            }
+                        }
 
                         firstAndSirName.setText(username);
                         BirthDay.setText(dateTimeBirthday);
@@ -725,6 +743,13 @@ public class UserActivity extends AppCompatActivity implements ActionSheet.Actio
         findViewById(R.id.window1).startAnimation(shake);
     }
 
+    public String hentString(Context context, String imageDir,String imageName){
+        ContextWrapper cw = new ContextWrapper(context);
+        File directory = cw.getDir(imageDir, Context.MODE_PRIVATE);
+        File myImageFile = new File(directory, imageName);
+        return myImageFile.getAbsolutePath();
+    }
+
     private Target picassoImageTarget(Context context, final String imageDir, final String imageName) {
         ContextWrapper cw = new ContextWrapper(context);
         final File directory = cw.getDir(imageDir, Context.MODE_PRIVATE);
@@ -749,12 +774,9 @@ public class UserActivity extends AppCompatActivity implements ActionSheet.Actio
                                 e.printStackTrace();
                             }
                         }
-                        Log.i("image", "image saved to >>>" + myImageFile.getAbsolutePath());
-
                     }
                 }).start();
             }
-
 
             @Override
             public void onBitmapFailed(Drawable errorDrawable) {
@@ -767,6 +789,8 @@ public class UserActivity extends AppCompatActivity implements ActionSheet.Actio
         };
     }
 
+
+
     private void deleteTempFolder(String dir) {
         File myDir = new File(Environment.getExternalStorageDirectory() + "/"+dir);
         if (myDir.isDirectory()) {
@@ -776,4 +800,5 @@ public class UserActivity extends AppCompatActivity implements ActionSheet.Actio
             }
         }
     }
+
 }

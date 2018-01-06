@@ -3,29 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/darkblue"
     android:layout_height="match_parent"
     tools:context="com.example.jorgenskevik.e_cardholders.PictureActivity">
-
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        android:id="@+id/appBarLayout">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_main4"
-        android:id="@+id/include" />
-
-
-
 
     <ImageView
         android:id="@+id/imageView8"
@@ -36,8 +16,7 @@
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
         android:layout_above="@+id/textView5"
-        android:src="@drawable/facebookgirl"
-         />
+        android:src="@drawable/facebookgirl" />
 
     <TextView
         android:id="@+id/textView8"
@@ -46,6 +25,9 @@
         android:layout_marginTop="15dp"
         android:text="@string/writepictureToken"
         android:layout_below="@+id/textView3"
+        android:textColor="@color/tw__solid_white"
+        android:textSize="14dp"
+        android:textStyle="bold"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -53,6 +35,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:textColorHint="@color/tw__solid_white"
+        android:textColor="@color/tw__solid_white"
         android:maxLength="4"
         android:inputType="text"
         android:layout_below="@+id/textView8"
@@ -65,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="addPictureButton"
-        android:background="@color/tw__blue_default"
+        android:background="@drawable/my_button_bg"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -74,6 +58,8 @@
         android:layout_marginRight="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
+        android:textColor="@color/tw__solid_white"
+        android:textStyle="bold"
         android:text="@string/setPic" />
 
     <TextView
@@ -90,12 +76,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView8"
-        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textColor="@color/tw__solid_white"
+        android:textStyle="bold"
+        android:textSize="14dp"
         android:layout_marginLeft="15dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
-        android:text="@string/allertMessage"
-        android:textColorLink="@android:color/holo_red_light" />
+        android:text="@string/allertMessage" />
 
     <Button
         android:id="@+id/textView6"
@@ -104,11 +92,11 @@
         android:background="@color/tw__transparent"
         android:onClick="moreInfo"
         android:text="(?)"
+        android:textColor="@color/tw__solid_white"
         android:textColorLink="@color/tw__blue_default"
         android:layout_alignBaseline="@+id/textView8"
         android:layout_alignBottom="@+id/textView8"
         android:layout_alignRight="@+id/button10"
         android:layout_alignEnd="@+id/button10" />
-
 
 </RelativeLayout>

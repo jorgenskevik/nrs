@@ -73,7 +73,6 @@ public interface UserAPI {
     /**
      * User login call.
      *
-     * @param auth      the auth
      * @param link      the link
      * @param clientKey the client key
      * @param number    the number
@@ -81,8 +80,9 @@ public interface UserAPI {
      * @return the call
      */
     @POST("auth")
-    Call<LoginModel> userLogin(@Header("X-Verify-Credentials-Authorization") String auth, @Header("X-Auth-Service-Provider") String link,
-                               @Header("client_key") String clientKey, @Header("phoneNumber") String number,
-                               @Header("accept-version") String version);
+    Call<LoginModel> userLogin(@Header("phoneNumber") String number,
+                               @Header("firebase-token") String link,
+                               @Header("client_key") String clientKey,
+                               @Header("Accept-Version") String version);
 
 }
