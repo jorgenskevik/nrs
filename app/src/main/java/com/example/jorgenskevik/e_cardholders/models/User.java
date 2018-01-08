@@ -52,6 +52,20 @@ public class User {
     @Expose
     private Date dateOfBirth;
 
+    @SerializedName("schoolClass")
+    @Expose
+    private String schoolClass;
+
+
+
+    public String getschoolClass() {
+        return schoolClass;
+    }
+
+    public void setschoolClass(String schoolClass) {
+        this.schoolClass = schoolClass;
+    }
+
 
     /**
      * Gets id.

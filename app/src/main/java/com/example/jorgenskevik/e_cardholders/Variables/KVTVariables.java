@@ -21,6 +21,7 @@ public class KVTVariables {
     private static String tokenPhone = "";
     private static String pictureToken = "";
     private static String picture = "";
+    private static String clas = "";
     private static String role = "";
     private static String birthday = "";
     private static SharedPreferences userIdPrefs;
@@ -151,6 +152,10 @@ public class KVTVariables {
         return role;
     }
 
+    public static String getClas() {
+        return clas;
+    }
+
     /**
      * Sets local url.
      *
@@ -266,6 +271,10 @@ public class KVTVariables {
      */
     public static void setPicture(String picture) {
         KVTVariables.picture = picture;
+    }
+
+    public static void setClas(String clas) {
+        KVTVariables.clas = clas;
     }
 
     /**

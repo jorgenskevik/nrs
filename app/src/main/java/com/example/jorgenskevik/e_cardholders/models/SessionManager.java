@@ -123,6 +123,9 @@ public class SessionManager {
 
     public static final String KEY_TURN = "turn";
 
+    public static final String KEY_CLAS = "clas";
+
+
 
     /**
      * Instantiates a new Session manager.
@@ -285,6 +288,18 @@ public class SessionManager {
 
         // Storing role in pref
         editor.putString(KEY_PICTURE, picture);
+
+        // commit changes
+        editor.apply();
+
+    }
+
+    public void updateClas(String clas){
+        // Storing login value as TRUE
+        editor.putBoolean(IS_LOGIN, true);
+
+        // Storing role in pref
+        editor.putString(KEY_CLAS, clas);
 
         // commit changes
         editor.apply();

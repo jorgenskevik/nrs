@@ -458,6 +458,7 @@ public class LoginActivity extends AppCompatActivity  implements
                                             String emailString = LoginList.user.getEmail();
                                             String tokenString = LoginList.token;
                                             String picture = LoginList.user.getPicture();
+                                            String clas = LoginList.user.getschoolClass();
 
                                             String studentNumber = LoginList.user.getStudentNumber();
                                             String id = LoginList.user.getId();
